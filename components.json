@@ -1,0 +1,1764 @@
+{
+    "schemas": {
+        "Attachment": {
+            "description": "An attachment.",
+            "type": "object",
+            "properties": {
+                "lastModified": {
+                    "format": "date-time",
+                    "description": "A date of last modification of a document",
+                    "type": "string",
+                    "example": "2022-09-07T15:01:42"
+                },
+                "name": {
+                    "description": "A name of the file",
+                    "type": "string",
+                    "example": "i14710-o3.pdf"
+                },
+                "URL": {
+                    "description": "An url to download a file",
+                    "type": "string",
+                    "example": "https://orka2.sejm.gov.pl/INT9.nsf/klucz/ATTBXWKH2/$FILE/i14710-o3.pdf"
+                }
+            }
+        },
+        "Club": {
+            "description": "A club.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "an id of the club",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the club",
+                    "type": "string",
+                    "example": "KO"
+                },
+                "phone": {
+                    "description": "Phone to the club",
+                    "type": "string",
+                    "example": "(22) 694-25-92"
+                },
+                "fax": {
+                    "description": "FAX to the club",
+                    "type": "string",
+                    "example": "(22) 694-25-92"
+                },
+                "email": {
+                    "description": "Email to the club",
+                    "type": "string",
+                    "example": "kp-ko@kluby.sejm.pl"
+                },
+                "membersCount": {
+                    "format": "int32",
+                    "description": "Number of club members",
+                    "type": "integer",
+                    "example": 126
+                }
+            }
+        },
+        "ComitteeType": {
+            "enum": [
+                "STANDING",
+                "EXTRAORDINARY",
+                "INVESTIGATIVE"
+            ],
+            "type": "string"
+        },
+        "Committee": {
+            "description": "A comittee.",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Code of committee",
+                    "type": "string",
+                    "example": "ENM"
+                },
+                "name": {
+                    "description": "Name of the committee",
+                    "type": "string",
+                    "example": "Komisja Edukacji, Nauki i Młodzieży"
+                },
+                "nameGenitive": {
+                    "description": "Name of the committee in genitive",
+                    "type": "string",
+                    "example": "Komisji Edukacji, Nauki i Młodzieży"
+                },
+                "type": {
+                    "description": "Type of the committee",
+                    "type": "string",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/ComitteeType"
+                        }
+                    ],
+                    "example": "INVESTIGATIVE"
+                },
+                "phone": {
+                    "description": "Phone of the committee",
+                    "type": "string",
+                    "example": "(22) 694-12-99, 694-20-85"
+                },
+                "appointmentDate": {
+                    "format": "date",
+                    "description": "Date of appointment",
+                    "type": "string",
+                    "example": "2019-11-13"
+                },
+                "compositionDate": {
+                    "format": "date",
+                    "description": "Date of composition",
+                    "type": "string",
+                    "example": "2019-11-13"
+                },
+                "scope": {
+                    "description": "Description of the committee",
+                    "type": "string",
+                    "example": "Do zakresu działania Komisji należą sprawy kształcenia i wychowania przedszkolnego, podstawowego, ogólnokształcącego, zawodowego, pomaturalnego i wyższego, ..."
+                },
+                "members": {
+                    "description": "a list of committee members (current or at the date of closing the committee)",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/Member"
+                    }
+                }
+            }
+        },
+        "CommitteeSitting": {
+            "description": "A committee sitting.",
+            "type": "object",
+            "properties": {
+                "num": {
+                    "format": "int32",
+                    "description": "A sitting number",
+                    "type": "integer",
+                    "example": 1
+                },
+                "date": {
+                    "format": "date",
+                    "description": "A sitting date",
+                    "type": "string",
+                    "example": "2023-11-21"
+                },
+                "closed": {
+                    "description": "A flag indicating that a meeting is closed",
+                    "type": "boolean"
+                },
+                "remote": {
+                    "description": "A flag indicating that a meeting is a remote meeting",
+                    "type": "boolean"
+                },
+                "video": {
+                    "description": "A list of links to video",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "audio": {
+                    "description": "A link to audio file",
+                    "type": "string"
+                },
+                "city": {
+                    "description": "A city where meeting took place",
+                    "type": "string"
+                },
+                "jointWith": {
+                    "description": "A list of committees at joint meeting",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "agenda": {
+                    "description": "An agenda of a meeting",
+                    "type": "string"
+                }
+            }
+        },
+        "Group": {
+            "description": "A group",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "description": "ID used to get group details",
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "description": "Name of the group",
+                    "type": "string",
+                    "example": "Polsko-Albańska Grupa Parlamentarna"
+                },
+                "engName": {
+                    "description": "Name of the group in english",
+                    "type": "string",
+                    "example": "Polish-Albanian Parliamentary Group"
+                },
+                "appointmentDate": {
+                    "format": "date",
+                    "description": "appointment date",
+                    "type": "string",
+                    "example": "2022-03-10"
+                }
+            }
+        },
+        "GroupDetails": {
+            "description": "A group details",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "description": "ID used to get group details",
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "description": "Name of the group",
+                    "type": "string",
+                    "example": "Polsko-Albańska Grupa Parlamentarna"
+                },
+                "engName": {
+                    "description": "Name of the group in english",
+                    "type": "string",
+                    "example": "Polish-Albanian Parliamentary Group"
+                },
+                "appointmentDate": {
+                    "format": "date",
+                    "description": "appointment date",
+                    "type": "string",
+                    "example": "2022-03-10"
+                },
+                "remarks": {
+                    "description": "remarks",
+                    "type": "string"
+                },
+                "members": {
+                    "description": "members",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/GroupMember"
+                    }
+                }
+            }
+        },
+        "GroupMember": {
+            "description": "Information about a member of a group",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "A number of the identity card of the MP",
+                    "type": "string",
+                    "example": "6"
+                },
+                "name": {
+                    "description": "Last and first name of the MP",
+                    "type": "string",
+                    "example": "Andzel Waldemar"
+                },
+                "club": {
+                    "description": "Name of a club",
+                    "type": "string",
+                    "example": "PiS"
+                },
+                "senator": {
+                    "description": "A flag indicating that a member is not an MP, but a senate member",
+                    "type": "boolean",
+                    "example": false
+                },
+                "type": {
+                    "description": "A type of membership",
+                    "type": "string",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/MemberType"
+                        }
+                    ],
+                    "example": "chairman"
+                },
+                "membershipStart": {
+                    "format": "date",
+                    "description": "A date when membership in this group started",
+                    "type": "string",
+                    "example": "2023-10-10"
+                },
+                "membershipEnd": {
+                    "format": "date",
+                    "description": "A date when membership in this group ended",
+                    "type": "string",
+                    "example": "2023-10-10"
+                },
+                "mandateEnd": {
+                    "format": "date",
+                    "description": "A date when mandate of MP expired",
+                    "type": "string",
+                    "example": "2023-10-10"
+                }
+            }
+        },
+        "Interpellation": {
+            "description": "An interpellation (pl: interpelacja).",
+            "type": "object",
+            "properties": {
+                "term": {
+                    "format": "int32",
+                    "description": "A Sejm term when the document was submitted",
+                    "type": "integer",
+                    "example": 9
+                },
+                "num": {
+                    "format": "int32",
+                    "description": "A document number",
+                    "type": "integer",
+                    "example": 14710
+                },
+                "title": {
+                    "description": "A title of the case",
+                    "type": "string",
+                    "example": "Interpelacja w sprawie trudnej sytuacji osób niepełnosprawnych z uwagi na kwarantannę nakładaną na ich opiekunów"
+                },
+                "receiptDate": {
+                    "format": "date",
+                    "description": "A date when the case was received",
+                    "type": "string",
+                    "example": "2020-11-16"
+                },
+                "lastModified": {
+                    "format": "date-time",
+                    "description": "A date of last modification of a document",
+                    "type": "string",
+                    "example": "2022-09-07T15:01:42"
+                },
+                "links": {
+                    "description": "Links to HTML pages with a description or a content (body)",
+                    "type": "array",
+                    "items": {}
+                },
+                "from": {
+                    "description": "A list of IDs of MPs who submitted the question",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": 101
+                },
+                "to": {
+                    "description": "A list of ministries to whom the question was sent",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "minister rodziny i polityki społecznej",
+                        "minister zdrowia"
+                    ]
+                },
+                "sentDate": {
+                    "format": "date",
+                    "description": "A date when the interpellation was sent to recipients",
+                    "type": "string",
+                    "example": "2021-01-20"
+                },
+                "replies": {
+                    "description": "A list of replies",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/Reply"
+                    }
+                },
+                "repeatedInterpellation": {
+                    "description": "a list of interpellations that were submitted after reciving unsatisfactory answer (request for additional explanations)",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/Interpellation"
+                    }
+                }
+            }
+        },
+        "LocalDate": {
+            "format": "date",
+            "type": "string",
+            "example": "2022-03-10"
+        },
+        "LocalDateTime": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2022-03-10T12:15:50"
+        },
+        "MP": {
+            "description": "A MP.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "description": "A number of the identity card of the MP.",
+                    "type": "integer",
+                    "example": 103
+                },
+                "firstLastName": {
+                    "description": "The first and last name of the MP.",
+                    "type": "string",
+                    "example": "Marta Golbik"
+                },
+                "lastFirstName": {
+                    "description": "The last and first name of the MP.",
+                    "type": "string",
+                    "example": "Golbik Marta"
+                },
+                "firstName": {
+                    "description": "The first name of the MP.",
+                    "type": "string",
+                    "example": "Marta"
+                },
+                "secondName": {
+                    "description": "The second name of the MP.",
+                    "type": "string",
+                    "example": "Joanna"
+                },
+                "lastName": {
+                    "description": "The last name of the MP.",
+                    "type": "string",
+                    "example": "Golbik"
+                },
+                "genitiveName": {
+                    "description": "The first and last name in genitive case.",
+                    "type": "string",
+                    "example": "Marty Golbik"
+                },
+                "accusativeName": {
+                    "description": "The first and last name in accusative case.",
+                    "type": "string",
+                    "example": "Martę Golbik"
+                },
+                "email": {
+                    "description": "The email of the MP.",
+                    "type": "string",
+                    "example": "Marta.Golbik@sejm.pl"
+                },
+                "active": {
+                    "description": "Is the MP active?",
+                    "type": "boolean",
+                    "example": true
+                },
+                "inactiveCause": {
+                    "description": "The cause of inactivity",
+                    "type": "string",
+                    "example": "Zrzeczenie"
+                },
+                "waiverDesc": {
+                    "description": "?",
+                    "type": "string"
+                },
+                "districtNum": {
+                    "format": "int32",
+                    "description": "A district id where MP was elected",
+                    "type": "integer",
+                    "example": 29
+                },
+                "districtName": {
+                    "description": "A district name where MP was elected",
+                    "type": "string",
+                    "example": "Katowice"
+                },
+                "voivodeship": {
+                    "description": "A voivodeship where MP was elected",
+                    "type": "string",
+                    "example": "śląskie"
+                },
+                "club": {
+                    "description": "A club to where MP is belonging",
+                    "type": "string",
+                    "example": "KO"
+                },
+                "birthDate": {
+                    "format": "date",
+                    "description": "a date of birth",
+                    "type": "string",
+                    "example": "1985-04-14"
+                },
+                "birthLocation": {
+                    "description": "a place of birth",
+                    "type": "string",
+                    "example": "Gliwice"
+                },
+                "profession": {
+                    "description": "a profession",
+                    "type": "string",
+                    "example": "przedsiębiorca prywatny"
+                },
+                "educationLevel": {
+                    "description": "an education level",
+                    "type": "string",
+                    "example": "wyższe"
+                },
+                "numberOfVotes": {
+                    "format": "int32",
+                    "description": "a number of votes",
+                    "type": "integer",
+                    "example": 19430
+                }
+            }
+        },
+        "Member": {
+            "description": "A member of a committee or a parliamentary team.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "description": "A number of the identity card of the MP.",
+                    "type": "integer"
+                },
+                "lastFirstName": {
+                    "description": "The last and first name of the MP.",
+                    "type": "string"
+                },
+                "function": {
+                    "description": "A function in the committee.",
+                    "type": "string"
+                },
+                "mandateExpired": {
+                    "format": "date",
+                    "description": "A function in the committee.",
+                    "type": "string",
+                    "example": "2022-03-10"
+                },
+                "club": {
+                    "description": "A club to where MP is belonging",
+                    "type": "string"
+                }
+            }
+        },
+        "MemberType": {
+            "enum": [
+                "chairman",
+                "co_chairman",
+                "deputy_chairman",
+                "secretary",
+                "member"
+            ],
+            "type": "string"
+        },
+        "Print": {
+            "description": "A print",
+            "type": "object",
+            "properties": {
+                "term": {
+                    "format": "int32",
+                    "description": "a Sejm term",
+                    "type": "integer",
+                    "example": 9
+                },
+                "number": {
+                    "description": "a number of a print in the specified Sejm term",
+                    "type": "string",
+                    "example": "19, 1006-A"
+                },
+                "numberAssociated": {
+                    "description": "numbers of prints that this print is associated with",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": 609
+                },
+                "title": {
+                    "description": "a title of a print",
+                    "type": "string",
+                    "example": "Opinia Komisji Sprawiedliwości i Praw Człowieka dotycząca wniosków w sprawie wyboru na stanowiska sędziów Trybunału Konstytucyjnego."
+                },
+                "documentDate": {
+                    "format": "date",
+                    "description": "a date of a print",
+                    "type": "string",
+                    "example": "2019-11-20"
+                },
+                "deliveryDate": {
+                    "format": "date",
+                    "description": "a date of delivery of a print",
+                    "type": "string",
+                    "example": "2019-11-20"
+                },
+                "processPrint": {
+                    "description": "a list of prints that started a legislative process that this print is connected to",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "16",
+                        "17"
+                    ]
+                },
+                "changeDate": {
+                    "format": "date-time",
+                    "description": "a date of of last change to the print",
+                    "type": "string",
+                    "example": "2020-10-02T12:49:35"
+                },
+                "attachments": {
+                    "description": "a list of attachments added to the print",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "additionalPrints": {
+                    "description": "a list of additional prints added to the print",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/Print"
+                    }
+                }
+            }
+        },
+        "PrintInfo": {
+            "description": "info about prints",
+            "type": "object",
+            "properties": {
+                "count": {
+                    "format": "int32",
+                    "description": "number of prints",
+                    "type": "integer",
+                    "example": 735
+                },
+                "lastChanged": {
+                    "format": "date-time",
+                    "description": "date of last changed document",
+                    "type": "string",
+                    "example": "2022-03-10T12:15:50"
+                },
+                "link": {
+                    "description": "a link to prints endpoint",
+                    "type": "string"
+                }
+            }
+        },
+        "Proceeding": {
+            "description": "A proceeding.",
+            "type": "object",
+            "properties": {
+                "title": {
+                    "description": "a title of the proceeding",
+                    "type": "string",
+                    "example": "1. Posiedzenie Sejmu RP w dniach 12, 13, 19 i 21 listopada 2019 r."
+                },
+                "dates": {
+                    "description": "a dates of the proceeding",
+                    "type": "array",
+                    "items": {
+                        "format": "date",
+                        "type": "string",
+                        "example": "2022-03-10"
+                    }
+                },
+                "number": {
+                    "format": "int32",
+                    "description": "a proceeding number",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "ProcessDetails": {
+            "description": "A details of legislative process",
+            "type": "object",
+            "properties": {
+                "term": {
+                    "format": "int32",
+                    "description": "a Sejm term",
+                    "type": "integer",
+                    "example": 9
+                },
+                "number": {
+                    "description": "a number of a print in the specified Sejm term",
+                    "type": "string",
+                    "example": "19"
+                },
+                "title": {
+                    "description": "a title of a process",
+                    "type": "string",
+                    "example": "Rządowy projekt ustawy o zmianie ustawy o transporcie kolejowym"
+                },
+                "description": {
+                    "description": "a description of a process",
+                    "type": "string",
+                    "example": "projekt ustawy dotyczy utworzenia nowego uniwersytetu medycznego"
+                },
+                "uE": {
+                    "description": "is this process realization of the UE law",
+                    "type": "string",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/UEStatus"
+                        }
+                    ],
+                    "example": "NO"
+                },
+                "documentDate": {
+                    "format": "date",
+                    "description": "a date of a print",
+                    "type": "string",
+                    "example": "2019-11-19"
+                },
+                "changeDate": {
+                    "format": "date-time",
+                    "description": "a date of last change to the process",
+                    "type": "string",
+                    "example": "2019-11-21T10:01:37"
+                },
+                "webGeneratedDate": {
+                    "format": "date-time",
+                    "description": "A date when a web page with a process was updated",
+                    "type": "string",
+                    "example": "2020-01-02T15:00:52"
+                },
+                "processStartDate": {
+                    "format": "date",
+                    "description": "a date of the start of the process",
+                    "type": "string",
+                    "example": "2019-11-19"
+                },
+                "documentType": {
+                    "description": "a type of a document",
+                    "type": "string",
+                    "example": "projekt ustawy"
+                },
+                "comments": {
+                    "description": "comments",
+                    "type": "string",
+                    "example": "Obywatelski projekt ustawy został wniesiony w VIII kadencji Sejmu (druk nr 226). Na podstawie art. 4. ust. 3 ustawy o wykonywaniu inicjatywy ustawodawczej przez obywateli - projekt ustawy, w stosunku do którego postępowanie ustawodawcze nie zostało zakończone w trakcie kadencji Sejmu, w której został wniesiony, jest rozpatrywany przez Sejm następnej kadencji."
+                },
+                "otherDocuments": {
+                    "description": "other prints, corrections",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/ProcessDocument"
+                    }
+                },
+                "rclNum": {
+                    "description": "number from goverment part of the process (from RCL website)",
+                    "type": "string",
+                    "example": "RM-0610-84-21"
+                },
+                "urgencyStatus": {
+                    "description": "urgency status",
+                    "type": "string",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/UrgencyStatus"
+                        }
+                    ],
+                    "example": "NORMAL"
+                },
+                "urgencyWithdrawDate": {
+                    "format": "date",
+                    "description": "date when urgency clause was withdrawn",
+                    "type": "string",
+                    "example": "2022-03-10"
+                },
+                "legislativeCommittee": {
+                    "description": "indicates that for work on this project a members of Legislative Committee has been assigned",
+                    "type": "boolean",
+                    "example": false
+                },
+                "principleOfSubsidiarity": {
+                    "description": "indicates that the project is inconsistent with the principle of subsidiarity",
+                    "type": "boolean",
+                    "example": false
+                },
+                "stages": {
+                    "description": "stages of the process",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/ProcessStage"
+                    }
+                },
+                "printsConsideredJointly": {
+                    "description": "prints considered jointly",
+                    "uniqueItems": true,
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "ProcessDocument": {
+            "description": "A document in the legislative process.",
+            "type": "object",
+            "properties": {
+                "number": {
+                    "description": "a print number",
+                    "type": "string",
+                    "example": "13-A"
+                },
+                "registeredDate": {
+                    "format": "date",
+                    "description": "a date when a document was registered",
+                    "type": "string",
+                    "example": "2019-11-28"
+                }
+            }
+        },
+        "ProcessHeader": {
+            "description": "A legislative process",
+            "type": "object",
+            "properties": {
+                "uE": {
+                    "description": "is this process realization of the UE law",
+                    "type": "string",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/UEStatus"
+                        }
+                    ],
+                    "example": "NO"
+                },
+                "term": {
+                    "format": "int32",
+                    "description": "A Sejm term",
+                    "type": "integer",
+                    "example": 9
+                },
+                "number": {
+                    "description": "A number of the process",
+                    "type": "string",
+                    "example": "40"
+                },
+                "title": {
+                    "description": "A title of the process",
+                    "type": "string",
+                    "example": "Obywatelski projekt ustawy o ochronie własności w Rzeczypospolitej Polskiej przed roszczeniami dotyczącymi mienia bezdziedzicznego"
+                },
+                "description": {
+                    "description": "A description of the process",
+                    "type": "string",
+                    "example": "projekt dotyczy zawieszenia na okres 6 miesięcy 2020 r. funkcjonowania ustawy. Przepisy ustawy będą stosowane do przychodów ze sprzedaży detalicznej osiągniętych od 1 lipca 2020 r"
+                },
+                "ue": {
+                    "description": "A UE type of process",
+                    "type": "string",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/UEStatus"
+                        }
+                    ],
+                    "example": "NO"
+                },
+                "documentDate": {
+                    "format": "date",
+                    "description": "A date of document",
+                    "type": "string",
+                    "example": "2019-11-28"
+                },
+                "processStartDate": {
+                    "format": "date",
+                    "description": "A date of start process",
+                    "type": "string",
+                    "example": "2019-11-28"
+                },
+                "changeDate": {
+                    "format": "date-time",
+                    "description": "A date of change process",
+                    "type": "string",
+                    "example": "2020-01-02T15:00:52"
+                },
+                "documentType": {
+                    "description": "A document type",
+                    "type": "string",
+                    "example": "projekt ustawy"
+                },
+                "comments": {
+                    "description": "Comments",
+                    "type": "string",
+                    "example": "Obywatelski projekt ustawy został wniesiony w VIII kadencji Sejmu (druk nr 226). Na podstawie art. 4. ust. 3 ustawy o wykonywaniu inicjatywy ustawodawczej przez obywateli - projekt ustawy, w stosunku do którego postępowanie ustawodawcze nie zostało zakończone w trakcie kadencji Sejmu, w której został wniesiony, jest rozpatrywany przez Sejm następnej kadencji."
+                },
+                "webGeneratedDate": {
+                    "format": "date-time",
+                    "description": "A date when a web page with a process was updated",
+                    "type": "string",
+                    "example": "2020-01-02T15:00:52"
+                }
+            }
+        },
+        "ProcessStage": {
+            "description": "a stage in the legislative process",
+            "type": "object",
+            "properties": {
+                "stageName": {
+                    "description": "a name of a stage",
+                    "type": "string",
+                    "example": "I czytanie na posiedzeniu Sejmu"
+                },
+                "date": {
+                    "format": "date",
+                    "description": "a stage date",
+                    "type": "string",
+                    "example": "2019-11-28"
+                },
+                "children": {
+                    "description": "child stages",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/ProcessStage"
+                    }
+                }
+            }
+        },
+        "ProcessStageGovermentPosition": {
+            "description": "goverment position",
+            "type": "object",
+            "properties": {
+                "stageName": {
+                    "description": "a name of a stage",
+                    "type": "string",
+                    "example": "I czytanie na posiedzeniu Sejmu"
+                },
+                "date": {
+                    "format": "date",
+                    "description": "a stage date",
+                    "type": "string",
+                    "example": "2019-11-28"
+                },
+                "children": {
+                    "description": "child stages",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/ProcessStage"
+                    }
+                }
+            }
+        },
+        "ProcessStageOpinion": {
+            "description": "opinion",
+            "type": "object",
+            "properties": {
+                "stageName": {
+                    "description": "a name of a stage",
+                    "type": "string",
+                    "example": "I czytanie na posiedzeniu Sejmu"
+                },
+                "date": {
+                    "format": "date",
+                    "description": "a stage date",
+                    "type": "string",
+                    "example": "2019-11-28"
+                },
+                "children": {
+                    "description": "child stages",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/ProcessStage"
+                    }
+                },
+                "organ": {
+                    "description": "organ",
+                    "type": "string",
+                    "example": "Organizacja samorządowa"
+                },
+                "opinionReceived": {
+                    "format": "date",
+                    "description": "date when the opinion was received",
+                    "type": "string",
+                    "example": "2019-11-12"
+                },
+                "toCommission": {
+                    "format": "date",
+                    "description": "date when the opinion was sent to commission",
+                    "type": "string",
+                    "example": "Sejm"
+                }
+            }
+        },
+        "ProcessStageReading": {
+            "description": "reading",
+            "type": "object",
+            "properties": {
+                "stageName": {
+                    "description": "a name of a stage",
+                    "type": "string",
+                    "example": "I czytanie na posiedzeniu Sejmu"
+                },
+                "date": {
+                    "format": "date",
+                    "description": "a stage date",
+                    "type": "string",
+                    "example": "2019-11-28"
+                },
+                "children": {
+                    "description": "child stages",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/ProcessStage"
+                    }
+                },
+                "continuedOn": {
+                    "description": "reading continued on",
+                    "type": "array",
+                    "items": {
+                        "format": "date",
+                        "type": "string",
+                        "example": "2022-03-10"
+                    }
+                }
+            }
+        },
+        "ProcessStageReferral": {
+            "description": "referral",
+            "type": "object",
+            "properties": {
+                "stageName": {
+                    "description": "a name of a stage",
+                    "type": "string",
+                    "example": "I czytanie na posiedzeniu Sejmu"
+                },
+                "date": {
+                    "format": "date",
+                    "description": "a stage date",
+                    "type": "string",
+                    "example": "2019-11-28"
+                },
+                "children": {
+                    "description": "child stages",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/ProcessStage"
+                    }
+                },
+                "type": {
+                    "description": "referral type",
+                    "type": "string",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/ReferralType"
+                        }
+                    ],
+                    "example": ""
+                },
+                "committeeCode": {
+                    "description": "a committee code or null for Sejm reading",
+                    "type": "string",
+                    "example": "ENM"
+                },
+                "reportDate": {
+                    "format": "date",
+                    "description": "recommended date of report",
+                    "type": "string",
+                    "example": "2019-11-12"
+                },
+                "remarks": {
+                    "description": "remarks",
+                    "type": "string"
+                }
+            }
+        },
+        "ProcessStageSejmReading": {
+            "description": "reading on Sejm sitting",
+            "type": "object",
+            "properties": {
+                "stageName": {
+                    "description": "a name of a stage",
+                    "type": "string",
+                    "example": "I czytanie na posiedzeniu Sejmu"
+                },
+                "date": {
+                    "format": "date",
+                    "description": "a stage date",
+                    "type": "string",
+                    "example": "2019-11-28"
+                },
+                "children": {
+                    "description": "child stages",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/ProcessStage"
+                    }
+                },
+                "sittingNum": {
+                    "format": "int32",
+                    "description": "Sejm sitting number",
+                    "type": "integer",
+                    "example": 77
+                },
+                "comment": {
+                    "description": "comment",
+                    "type": "string",
+                    "example": "przez aklamację"
+                },
+                "decision": {
+                    "description": "decision",
+                    "type": "string",
+                    "example": "podjęto uchwałę"
+                },
+                "textAfter3": {
+                    "description": "a link to a text after third reading (in a PDF format)",
+                    "type": "string",
+                    "example": "https://orka.sejm.gov.pl/opinie9.nsf/dok?OpenAgent&495_u3"
+                }
+            }
+        },
+        "ProcessStageVoting": {
+            "description": "voting on a Sejm sitting",
+            "type": "object",
+            "properties": {
+                "stageName": {
+                    "description": "a name of a stage",
+                    "type": "string",
+                    "example": "I czytanie na posiedzeniu Sejmu"
+                },
+                "date": {
+                    "format": "date",
+                    "description": "a stage date",
+                    "type": "string",
+                    "example": "2019-11-28"
+                },
+                "children": {
+                    "description": "child stages",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/ProcessStage"
+                    }
+                },
+                "voting": {
+                    "description": "voting",
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/Voting"
+                        }
+                    ]
+                }
+            }
+        },
+        "ReferralType": {
+            "enum": [
+                "NORMAL",
+                "ADDITIONAL",
+                "OPINION",
+                "ADDITIONAL_OPINION",
+                "WITHDRAWAL"
+            ],
+            "type": "string"
+        },
+        "Reply": {
+            "description": "reply to an interpellation or question",
+            "type": "object",
+            "properties": {
+                "key": {
+                    "description": "a reply identifier",
+                    "type": "string",
+                    "example": "BJWJSS"
+                },
+                "receiptDate": {
+                    "format": "date",
+                    "description": "A date when the reply was received",
+                    "type": "string",
+                    "example": "2021-01-29"
+                },
+                "lastModified": {
+                    "format": "date-time",
+                    "description": "A date of last modification of a document",
+                    "type": "string",
+                    "example": "2022-09-07T15:01:42"
+                },
+                "from": {
+                    "description": "A name of an author",
+                    "type": "string",
+                    "example": "Sekretarz stanu Waldemar Kraska"
+                },
+                "links": {
+                    "description": "Links to HTML page with a description or a content (body)",
+                    "type": "array",
+                    "items": {}
+                },
+                "onlyAttachment": {
+                    "description": "Flag indicating that this reply contains only an attachment (without HTML body)",
+                    "type": "boolean",
+                    "example": false
+                },
+                "attachments": {
+                    "description": "Attachments",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/Attachment"
+                    }
+                }
+            }
+        },
+        "Term": {
+            "description": "information about a term of the Sejm",
+            "type": "object",
+            "properties": {
+                "num": {
+                    "format": "int32",
+                    "description": "Number of term of the Sejm",
+                    "type": "integer",
+                    "example": 9
+                },
+                "from": {
+                    "format": "date",
+                    "description": "Date start of term",
+                    "type": "string",
+                    "example": "2019-11-12"
+                },
+                "to": {
+                    "format": "date",
+                    "description": "Date end of term",
+                    "type": "string",
+                    "example": "2019-11-12"
+                },
+                "current": {
+                    "description": "Current of term",
+                    "type": "boolean",
+                    "example": true
+                },
+                "prints": {
+                    "description": "info about prints",
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/PrintInfo"
+                        }
+                    ]
+                }
+            }
+        },
+        "UEStatus": {
+            "enum": [
+                "NO",
+                "ADAPTATION",
+                "ENFORCEMENT"
+            ],
+            "type": "string"
+        },
+        "UrgencyStatus": {
+            "enum": [
+                "NORMAL",
+                "URGENT",
+                "URGENT_WITHDRAWN"
+            ],
+            "type": "string"
+        },
+        "Video": {
+            "description": "a video",
+            "type": "object",
+            "properties": {
+                "unid": {
+                    "description": "An unique indentifier of a transmission",
+                    "type": "string",
+                    "example": "758DAA6CDF68DFC0C12588F6003C6EF3"
+                },
+                "videoLink": {
+                    "description": "An URL or URLs to a video transmission",
+                    "type": "string",
+                    "example": "http://r.dcs.redcdn.pl/nvr/o2/sejm/ENC01/live.livx"
+                },
+                "otherVideoLinks": {
+                    "description": "A list of URLs to a other cameras in a video transmission",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": "http://r.dcs.redcdn.pl/nvr/o2/sejm/ENC01/live.livx, http://r.dcs.redcdn.pl/nvr/o2/sejm/ENC30/live.livx, http://r.dcs.redcdn.pl/nvr/o2/sejm/ENC31/live.livx, http://r.dcs.redcdn.pl/nvr/o2/sejm/ENC32/live.livx?startTime=710323200000"
+                },
+                "videoMessagesLink": {
+                    "description": "A link to a messages for a transmission",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type of transmission",
+                    "type": "string",
+                    "example": "komisja"
+                },
+                "transcribe": {
+                    "description": "Is there a transcription available",
+                    "type": "boolean",
+                    "example": true
+                },
+                "startDateTime": {
+                    "format": "date-time",
+                    "description": "A start date and time of transmission",
+                    "type": "string",
+                    "example": "2023-05-24T10:00:00"
+                },
+                "endDateTime": {
+                    "format": "date-time",
+                    "description": "An end date and time of transmission",
+                    "type": "string",
+                    "example": "2023-05-24T12:00:00"
+                },
+                "signLangLink": {
+                    "description": "An URL of a sign language transmission",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "A title of a transmission",
+                    "type": "string",
+                    "example": "Parlamentarny Zespół ds. Personelu Niemedycznego Ochrony Zdrowia"
+                },
+                "audio": {
+                    "description": "A link to a an audio file",
+                    "type": "string"
+                },
+                "room": {
+                    "description": "A room where the transmission takes place",
+                    "type": "string",
+                    "example": "sala im. Konstytucji 3-go Maja (nr 118, bud. C)"
+                },
+                "description": {
+                    "description": "A description of a transmission",
+                    "type": "string",
+                    "example": "Medyczne zawody niemedyczne - przyszłość przenoszenia niektórych dodatkowych zadań w ramach opieki nad pacjentem na personel niemedyczny oraz tworzenie związanych z tym możliwości rozwoju zawodowego dla personelu.\\r\\n\\r\\n"
+                },
+                "committee": {
+                    "description": "A committee code if the transmission is from a committee meeting",
+                    "type": "string",
+                    "example": "SUE"
+                }
+            }
+        },
+        "Vote": {
+            "description": "a vote",
+            "type": "object",
+            "properties": {
+                "MP": {
+                    "format": "int32",
+                    "description": "an MP number",
+                    "type": "integer",
+                    "example": 43
+                },
+                "firstName": {
+                    "description": "an MP first name",
+                    "type": "string",
+                    "example": "Jan"
+                },
+                "lastName": {
+                    "description": "an MP last name",
+                    "type": "string",
+                    "example": "Kowalski"
+                },
+                "secondName": {
+                    "description": "an MP second name",
+                    "type": "string",
+                    "example": "Krzysztof"
+                },
+                "club": {
+                    "description": "an MP club",
+                    "type": "string",
+                    "example": "PiS"
+                },
+                "vote": {
+                    "description": "a vote",
+                    "type": "string",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/VoteValue"
+                        }
+                    ],
+                    "example": "Za"
+                },
+                "listVotes": {
+                    "description": "a vote on a list",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/components/schemas/VoteValue"
+                    }
+                },
+                "mP": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "VoteMP": {
+            "description": "a vote used in MP votings",
+            "type": "object",
+            "properties": {
+                "votingNumber": {
+                    "format": "int32",
+                    "description": "a voting number",
+                    "type": "integer",
+                    "example": 43
+                },
+                "date": {
+                    "format": "date-time",
+                    "description": "a voting date and time",
+                    "type": "string",
+                    "example": "2022-09-29T15:56:30"
+                },
+                "kind": {
+                    "description": "a kind of voting",
+                    "type": "string",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/VotingKind"
+                        }
+                    ]
+                },
+                "title": {
+                    "description": "a voting title",
+                    "type": "string",
+                    "example": "Pkt. 27 Sprawozdanie Komisji o rządowym projekcie ustawy o zmianie ustawy - Prawo energetyczne oraz ustawy o odnawialnych źródłach energii (druki nr 2634, 2644 i 2644-A)"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string",
+                    "example": "a description of a voting"
+                },
+                "topic": {
+                    "description": "a voting topic",
+                    "type": "string",
+                    "example": "głosowanie nad całością projektu"
+                },
+                "vote": {
+                    "description": "a vote",
+                    "type": "string",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/VoteValue"
+                        }
+                    ],
+                    "example": "Za"
+                },
+                "listVotes": {
+                    "description": "'yes' votes on a list",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "VoteValue": {
+            "enum": [
+                "YES",
+                "NO",
+                "ABSTAIN",
+                "NO_VOTE",
+                "ABSENT",
+                "VOTE_VALID",
+                "VOTE_INVALID"
+            ],
+            "type": "string"
+        },
+        "Voting": {
+            "description": "a voting",
+            "type": "object",
+            "properties": {
+                "yes": {
+                    "format": "int32",
+                    "description": "number of 'yes' votes",
+                    "type": "integer",
+                    "example": 209
+                },
+                "no": {
+                    "format": "int32",
+                    "description": "number of 'no' votes",
+                    "type": "integer",
+                    "example": 17
+                },
+                "abstain": {
+                    "format": "int32",
+                    "description": "number of 'abstain' votes",
+                    "type": "integer",
+                    "example": 4
+                },
+                "notParticipating": {
+                    "format": "int32",
+                    "description": "number of people who did not vote",
+                    "type": "integer",
+                    "example": 1
+                },
+                "totalVoted": {
+                    "format": "int32",
+                    "description": "number of people who voted",
+                    "type": "integer",
+                    "example": 459
+                },
+                "term": {
+                    "format": "int32",
+                    "description": "a Sejm term",
+                    "type": "integer",
+                    "example": 9
+                },
+                "sitting": {
+                    "format": "int32",
+                    "description": "a Sejm sitting number",
+                    "type": "integer",
+                    "example": 62
+                },
+                "sittingDay": {
+                    "format": "int32",
+                    "description": "a day of Sejm sitting",
+                    "type": "integer",
+                    "example": 1
+                },
+                "votingNumber": {
+                    "format": "int32",
+                    "description": "a voting number",
+                    "type": "integer",
+                    "example": 43
+                },
+                "date": {
+                    "format": "date-time",
+                    "description": "a voting date and time",
+                    "type": "string",
+                    "example": "2022-09-29T15:56:30"
+                },
+                "title": {
+                    "description": "a voting title",
+                    "type": "string",
+                    "example": "Pkt. 27 Sprawozdanie Komisji o rządowym projekcie ustawy o zmianie ustawy - Prawo energetyczne oraz ustawy o odnawialnych źródłach energii (druki nr 2634, 2644 i 2644-A)"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string",
+                    "example": "a description of a voting"
+                },
+                "topic": {
+                    "description": "a voting topic",
+                    "type": "string",
+                    "example": "głosowanie nad całością projektu"
+                },
+                "pdfLink": {
+                    "description": "a link to a pdf file with voting results",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "a kind of voting",
+                    "type": "string",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/VotingKind"
+                        }
+                    ]
+                },
+                "votingOptions": {
+                    "description": "a list of options when voting on a list",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/VotingOption"
+                    }
+                }
+            }
+        },
+        "VotingDetails": {
+            "description": "a voting with results",
+            "type": "object",
+            "properties": {
+                "yes": {
+                    "format": "int32",
+                    "description": "number of 'yes' votes",
+                    "type": "integer",
+                    "example": 209
+                },
+                "no": {
+                    "format": "int32",
+                    "description": "number of 'no' votes",
+                    "type": "integer",
+                    "example": 17
+                },
+                "abstain": {
+                    "format": "int32",
+                    "description": "number of 'abstain' votes",
+                    "type": "integer",
+                    "example": 4
+                },
+                "notParticipating": {
+                    "format": "int32",
+                    "description": "number of people who did not vote",
+                    "type": "integer",
+                    "example": 1
+                },
+                "term": {
+                    "format": "int32",
+                    "description": "a Sejm term",
+                    "type": "integer",
+                    "example": 9
+                },
+                "sitting": {
+                    "format": "int32",
+                    "description": "a Sejm sitting number",
+                    "type": "integer",
+                    "example": 62
+                },
+                "sittingDay": {
+                    "format": "int32",
+                    "description": "a day of Sejm sitting",
+                    "type": "integer",
+                    "example": 1
+                },
+                "votingNumber": {
+                    "format": "int32",
+                    "description": "a voting number",
+                    "type": "integer",
+                    "example": 43
+                },
+                "date": {
+                    "format": "date-time",
+                    "description": "a voting date and time",
+                    "type": "string",
+                    "example": "2022-09-29T15:56:30"
+                },
+                "title": {
+                    "description": "a voting title",
+                    "type": "string",
+                    "example": "Pkt. 27 Sprawozdanie Komisji o rządowym projekcie ustawy o zmianie ustawy - Prawo energetyczne oraz ustawy o odnawialnych źródłach energii (druki nr 2634, 2644 i 2644-A)"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string",
+                    "example": "a description of a voting"
+                },
+                "topic": {
+                    "description": "a voting topic",
+                    "type": "string",
+                    "example": "głosowanie nad całością projektu"
+                },
+                "pdfLink": {
+                    "description": "a link to a pdf file with voting results",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "a kind of voting",
+                    "type": "string",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/VotingKind"
+                        }
+                    ]
+                },
+                "votingOptions": {
+                    "description": "a list of options when voting on a list",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/VotingOption"
+                    }
+                },
+                "totalVoted": {
+                    "format": "int32",
+                    "description": "number of people who voted",
+                    "type": "integer",
+                    "example": 459
+                },
+                "votes": {
+                    "description": "a list of votes",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/Vote"
+                    }
+                }
+            }
+        },
+        "VotingKind": {
+            "enum": [
+                "ELECTRONIC",
+                "TRADITIONAL",
+                "ON_LIST"
+            ],
+            "type": "string"
+        },
+        "VotingOption": {
+            "description": "voting option when voting on a list",
+            "type": "object",
+            "properties": {
+                "optionIndex": {
+                    "description": "an option index",
+                    "type": "integer",
+                    "example": 1
+                },
+                "option": {
+                    "description": "an option",
+                    "type": "string",
+                    "example": "STAROŃ LIDIA, INFORMACJA NR 1"
+                },
+                "description": {
+                    "description": "an optional description",
+                    "type": "string",
+                    "example": "w sprawie realizacji rządowego \"Programu budowy 100 obwodnic na lata 2020-2030\""
+                },
+                "votes": {
+                    "format": "int32",
+                    "description": "number of votes for this option",
+                    "type": "integer",
+                    "example": 213
+                }
+            }
+        },
+        "WrittenQuestion": {
+            "description": "A written question (pl: zapytanie).",
+            "type": "object",
+            "properties": {
+                "term": {
+                    "format": "int32",
+                    "description": "A Sejm term when the document was submitted",
+                    "type": "integer",
+                    "example": 9
+                },
+                "num": {
+                    "format": "int32",
+                    "description": "A document number",
+                    "type": "integer",
+                    "example": 14710
+                },
+                "title": {
+                    "description": "A title of the case",
+                    "type": "string",
+                    "example": "Interpelacja w sprawie trudnej sytuacji osób niepełnosprawnych z uwagi na kwarantannę nakładaną na ich opiekunów"
+                },
+                "receiptDate": {
+                    "format": "date",
+                    "description": "A date when the case was received",
+                    "type": "string",
+                    "example": "2020-11-16"
+                },
+                "lastModified": {
+                    "format": "date-time",
+                    "description": "A date of last modification of a document",
+                    "type": "string",
+                    "example": "2022-09-07T15:01:42"
+                },
+                "links": {
+                    "description": "Links to HTML pages with a description or a content (body)",
+                    "type": "array",
+                    "items": {}
+                },
+                "from": {
+                    "description": "A list of IDs of MPs who submitted the question",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": 101
+                },
+                "to": {
+                    "description": "A list of ministries to whom the question was sent",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "minister rodziny i polityki społecznej",
+                        "minister zdrowia"
+                    ]
+                },
+                "sentDate": {
+                    "format": "date",
+                    "description": "A date when the interpellation was sent to recipients",
+                    "type": "string",
+                    "example": "2021-01-20"
+                },
+                "replies": {
+                    "description": "A list of replies",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/Reply"
+                    }
+                }
+            }
+        }
+    }
+}
