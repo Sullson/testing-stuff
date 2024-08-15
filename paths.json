@@ -1,0 +1,1824 @@
+{
+    "/sejm/term": {
+        "get": {
+            "summary": "Returns a list of terms",
+            "responses": {
+                "200": {
+                    "description": "a list of terms",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Term"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}": {
+        "get": {
+            "summary": "Returns information about a term",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a term number",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "information about a term",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Term"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/MP": {
+        "get": {
+            "summary": "Returns a list of MPs",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of MPs",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/MP"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/MP/{id}": {
+        "get": {
+            "summary": "Returns an information about an MP",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "an MP ID",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 123
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "an information about an MP",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MP"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/MP/{id}/photo": {
+        "get": {
+            "summary": "Returns an MP photo",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "an MP ID",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 123
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "an MP photo"
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/MP/{id}/photo-mini": {
+        "get": {
+            "summary": "Returns an MP photo in small size",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "an MP ID",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 123
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "an MP photo in small size"
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/MP/{id}/votings/{sitting}/{date}": {
+        "get": {
+            "summary": "Returns an information about votings for an MP",
+            "parameters": [
+                {
+                    "name": "date",
+                    "in": "path",
+                    "description": "a date",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/components/schemas/LocalDate"
+                    },
+                    "example": "2023-12-13"
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "an MP ID",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 1
+                },
+                {
+                    "name": "sitting",
+                    "in": "path",
+                    "description": "a sitting number",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 1
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 10
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "an information about votings for an MP",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/VoteMP"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/bilateralGroups": {
+        "get": {
+            "summary": "Returns a list of bilateral groups",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of groups",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Group"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/bilateralGroups/{id}": {
+        "get": {
+            "summary": "Returns a groups details",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "an ID of the group",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 1
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a group details",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GroupDetails"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/clubs": {
+        "get": {
+            "summary": "Returns a list of clubs",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of clubs",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Club"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/clubs/{id}": {
+        "get": {
+            "summary": "Returns information about a club",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "a club ID",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "information about a club",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Club"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/clubs/{id}/logo": {
+        "get": {
+            "summary": "Returns a club image",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "a club id",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a club image",
+                    "content": {
+                        "image/jpeg": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/committees": {
+        "get": {
+            "summary": "Returns a list of committees",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of committees",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Committee"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/committees/{code}": {
+        "get": {
+            "summary": "Returns a committee details",
+            "parameters": [
+                {
+                    "name": "code",
+                    "in": "path",
+                    "description": "a committee code",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "ASW"
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a committee details",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Committee"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/committees/{code}/sittings": {
+        "get": {
+            "summary": "Returns a list of sittings",
+            "parameters": [
+                {
+                    "name": "code",
+                    "in": "path",
+                    "description": "a committee code",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "ASW"
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of sittings",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/CommitteeSitting"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/committees/{code}/sittings/{num}": {
+        "get": {
+            "summary": "Returns details about a sitting",
+            "parameters": [
+                {
+                    "name": "code",
+                    "in": "path",
+                    "description": "a committee code",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "ASW"
+                },
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "a sitting number",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 1
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a sitting",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CommitteeSitting"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/committees/{code}/sittings/{num}/html": {
+        "get": {
+            "summary": "Returns transcript of the meeting in the HTML format",
+            "parameters": [
+                {
+                    "name": "code",
+                    "in": "path",
+                    "description": "a committee code",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "ASW"
+                },
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "a sitting number",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 1
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a sitting transcript",
+                    "content": {
+                        "text/html; charset=UTF-8": {
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/committees/{code}/sittings/{num}/pdf": {
+        "get": {
+            "summary": "Returns transcript of the meeting in the PDF format",
+            "parameters": [
+                {
+                    "name": "code",
+                    "in": "path",
+                    "description": "a committee code",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "ASW"
+                },
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "a sitting number",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 1
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a sitting transcript"
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/interpellations": {
+        "get": {
+            "summary": "Returns a list of interpellations",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                },
+                {
+                    "name": "from",
+                    "in": "query",
+                    "description": "filters interpellations from a MP with a specified ID",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": 10
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "controls the maximum number of items that may be returned for a single request",
+                    "required": false,
+                    "schema": {
+                        "format": "int32",
+                        "default": 50,
+                        "minimum": 0,
+                        "exclusiveMinimum": true,
+                        "type": "integer"
+                    },
+                    "example": 50
+                },
+                {
+                    "name": "modifiedSince",
+                    "in": "query",
+                    "description": "filters interpellations modified since specified date",
+                    "required": false,
+                    "schema": {
+                        "$ref": "#/components/schemas/LocalDateTime"
+                    },
+                    "example": "2022-09-07T14:58:28"
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "controls the starting point within the collection of resource results",
+                    "required": false,
+                    "schema": {
+                        "format": "int32",
+                        "default": 0,
+                        "minimum": 0,
+                        "exclusiveMinimum": true,
+                        "type": "integer"
+                    },
+                    "example": 150
+                },
+                {
+                    "name": "since",
+                    "in": "query",
+                    "description": "filters interpellations starting from a specified date",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "2022-01-15"
+                },
+                {
+                    "name": "sort_by",
+                    "in": "query",
+                    "description": "sorts objects by specified field, to sort in descending order add a minus sign before field name",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "-lastModified"
+                },
+                {
+                    "name": "till",
+                    "in": "query",
+                    "description": "filters interpellations starting before a specified date",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "2022-01-25"
+                },
+                {
+                    "name": "title",
+                    "in": "query",
+                    "description": "filters interpellations containing a specified string in a title",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "kodeksu pracy"
+                },
+                {
+                    "name": "to",
+                    "in": "query",
+                    "description": "filters interpellations sent to a specified recipient",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "minister finansów"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of interpellations",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Interpellation"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/interpellations/{num}": {
+        "get": {
+            "summary": "Returns details of an interpellation",
+            "parameters": [
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "an interpellation number",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": 190
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "details of an interpellation",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Interpellation"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/interpellations/{num}/body": {
+        "get": {
+            "summary": "Returns an interpellation body in HTML format",
+            "parameters": [
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "an interpellation number",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": 190
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "an interpellation body in HTML format",
+                    "content": {
+                        "text/html; charset=UTF-8": {
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/interpellations/{num}/reply/{key}/body": {
+        "get": {
+            "summary": "Returns a reply body in HTML format",
+            "parameters": [
+                {
+                    "name": "key",
+                    "in": "path",
+                    "description": "a reply key (identifier)",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "BKMJQ2"
+                },
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "an interpellation number",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": 190
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a reply body in HTML format",
+                    "content": {
+                        "text/html; charset=UTF-8": {
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/prints": {
+        "get": {
+            "summary": "Returns a list of prints",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                },
+                {
+                    "name": "sort_by",
+                    "in": "query",
+                    "description": "sorts objects by specified field, to sort in descending order add a minus sign before field name",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "-lastModified"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of prints",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Print"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/prints/{num}": {
+        "get": {
+            "summary": "Returns information about a print",
+            "parameters": [
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "a print number",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": 19
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "information about a print",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Print"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/prints/{num}/{attach_name}": {
+        "get": {
+            "summary": "Returns a print attachment",
+            "parameters": [
+                {
+                    "name": "attach_name",
+                    "in": "path",
+                    "description": "an attachment name",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "19.pdf"
+                },
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "a print number",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": 19
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a print attachment"
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/proceedings": {
+        "get": {
+            "summary": "Returns a list of proceedings",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of proceedings",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Proceeding"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/proceedings/{id}": {
+        "get": {
+            "summary": "Returns information about a proceeding",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "a proceeding id",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 50
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "information about a proceeding",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Proceeding"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/processes": {
+        "get": {
+            "summary": "Returns a list of legislative processes",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of legislative processes",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/ProcessHeader"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/processes/{num}": {
+        "get": {
+            "summary": "Returns information about a process for a given print number",
+            "parameters": [
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "a print number",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": 1070
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "information about a process for a given print number",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProcessDetails"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/videos": {
+        "get": {
+            "summary": "Returns a list of video transmissions",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                },
+                {
+                    "name": "comm",
+                    "in": "query",
+                    "description": "filters videos for a specified committee",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "SUE"
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "controls the maximum number of items that may be returned for a single request",
+                    "required": false,
+                    "schema": {
+                        "format": "int32",
+                        "default": 50,
+                        "minimum": 0,
+                        "exclusiveMinimum": true,
+                        "type": "integer"
+                    },
+                    "example": 50
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "controls the starting point within the collection of resource results",
+                    "required": false,
+                    "schema": {
+                        "format": "int32",
+                        "default": 0,
+                        "minimum": 0,
+                        "exclusiveMinimum": true,
+                        "type": "integer"
+                    },
+                    "example": 150
+                },
+                {
+                    "name": "since",
+                    "in": "query",
+                    "description": "filters videos starting from a specified date",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "2022-01-15"
+                },
+                {
+                    "name": "till",
+                    "in": "query",
+                    "description": "filters videos starting before a specified date",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "2022-01-15"
+                },
+                {
+                    "name": "title",
+                    "in": "query",
+                    "description": "filters videos containing a specified string in a title",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "kodeksu pracy"
+                },
+                {
+                    "name": "type",
+                    "in": "query",
+                    "description": "filters videos with a specified type",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "komisja"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of video transmissions",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Video"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/videos/today": {
+        "get": {
+            "summary": "Returns a list of video transmissions for today",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of video transmissions for today",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Video"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/videos/{date}": {
+        "get": {
+            "summary": "Returns a list of video transmissions for a specified date",
+            "parameters": [
+                {
+                    "name": "date",
+                    "in": "path",
+                    "description": "a date",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/components/schemas/LocalDate"
+                    },
+                    "example": "2023-12-13"
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of video transmissions for specified date",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Video"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/videos/{unid}": {
+        "get": {
+            "summary": "Returns a video transmission details",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 10
+                },
+                {
+                    "name": "unid",
+                    "in": "path",
+                    "description": "an event identifier",
+                    "required": true,
+                    "schema": {
+                        "pattern": "[a-zA-Z0-9]{32}",
+                        "type": "string"
+                    },
+                    "example": "2A8A86E819C2C270C1258ACB0047A157"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a video transmissions metadata",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Video"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/votings/{sitting}": {
+        "get": {
+            "summary": "Returns a list of votings for a given sitting",
+            "parameters": [
+                {
+                    "name": "sitting",
+                    "in": "path",
+                    "description": "a sitting number",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 80
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of votings",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Voting"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/votings/{sitting}/{num}": {
+        "get": {
+            "summary": "Returns details about a voting, with voting results",
+            "parameters": [
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "a voting number",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 25
+                },
+                {
+                    "name": "sitting",
+                    "in": "path",
+                    "description": "a sitting number",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 80
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "information about a voting",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VotingDetails"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/writtenQuestions": {
+        "get": {
+            "summary": "Returns a list of written questions",
+            "parameters": [
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                },
+                {
+                    "name": "from",
+                    "in": "query",
+                    "description": "filters interpellations from a MP with a specified ID",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": 10
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "controls the maximum number of items that may be returned for a single request",
+                    "required": false,
+                    "schema": {
+                        "format": "int32",
+                        "default": 50,
+                        "minimum": 0,
+                        "exclusiveMinimum": true,
+                        "type": "integer"
+                    },
+                    "example": 50
+                },
+                {
+                    "name": "modifiedSince",
+                    "in": "query",
+                    "description": "filters interpellations modified since specified date",
+                    "required": false,
+                    "schema": {
+                        "$ref": "#/components/schemas/LocalDateTime"
+                    },
+                    "example": "2022-09-07T14:58:28"
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "controls the starting point within the collection of resource results",
+                    "required": false,
+                    "schema": {
+                        "format": "int32",
+                        "default": 0,
+                        "minimum": 0,
+                        "exclusiveMinimum": true,
+                        "type": "integer"
+                    },
+                    "example": 150
+                },
+                {
+                    "name": "since",
+                    "in": "query",
+                    "description": "filters interpellations starting from a specified date",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "2022-01-15"
+                },
+                {
+                    "name": "sort_by",
+                    "in": "query",
+                    "description": "sorts objects by specified field, to sort in descending order add a minus sign before field name",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "-lastModified"
+                },
+                {
+                    "name": "till",
+                    "in": "query",
+                    "description": "filters interpellations starting before a specified date",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "2022-01-25"
+                },
+                {
+                    "name": "title",
+                    "in": "query",
+                    "description": "filters interpellations containing a specified string in a title",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "kodeksu pracy"
+                },
+                {
+                    "name": "to",
+                    "in": "query",
+                    "description": "filters interpellations sent to a specified recipient",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "minister finansów"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a list of written questions",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/WrittenQuestion"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/writtenQuestions/{num}": {
+        "get": {
+            "summary": "Returns details of a written questions",
+            "parameters": [
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "a question number",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": 190
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "details of a written question",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WrittenQuestion"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/writtenQuestions/{num}/body": {
+        "get": {
+            "summary": "Returns a written question body in HTML format",
+            "parameters": [
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "a question number",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": 190
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a written question body in HTML format",
+                    "content": {
+                        "text/html; charset=UTF-8": {
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/sejm/term{term}/writtenQuestions/{num}/reply/{key}/body": {
+        "get": {
+            "summary": "Returns a reply body in HTML format",
+            "parameters": [
+                {
+                    "name": "key",
+                    "in": "path",
+                    "description": "a reply key (identifier)",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": "BKMJQ2"
+                },
+                {
+                    "name": "num",
+                    "in": "path",
+                    "description": "a written question number",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "example": 190
+                },
+                {
+                    "name": "term",
+                    "in": "path",
+                    "description": "a Sejm term",
+                    "required": true,
+                    "schema": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "example": 9
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "a reply body in HTML format",
+                    "content": {
+                        "text/html; charset=UTF-8": {
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
